@@ -1,5 +1,4 @@
-/*jslint 
-browser : true, continue : true,
+/*jslint browser : true, continue : true,
 devel : true, indent : 2, maxerr : 50,
 newcap : true, nomen : true, plusplus : true,
 regexp : true, sloppy : true, vars : false,
@@ -56,7 +55,7 @@ spa.shell = ( function () {
            		is_closed = px_chat_ht === configMap.chat_retract_height,
            		is_sliding = ! is_open && ! is_closed;
        	
-       		if ( is_sliding ) { return false; };    
+       		if ( is_sliding ) { return false; }   
   
       		 if ( do_extend ) {
          	  jqueryMap.$chat.animate(
@@ -69,9 +68,9 @@ spa.shell = ( function () {
                  	stateMap.is_chat_retracted = false;
                   	if ( callback ) {
                      	callback ( jqueryMap.$chat );
-                  	};
+                  	}
               	}
-           	)
+           	);
            
            		return true; 
        }
@@ -93,15 +92,15 @@ spa.shell = ( function () {
                  stateMap.is_chat_retracted = true;
                   if ( callback ) {
                      callback ( jqueryMap.$chat );
-                  };
+                  }
               }
        );
     
        return true;
-    }
+    };
     
     //event handlers
-    onClickChat = function( event ) {
+    onClickChat = function(event) {
        toggleChat( stateMap.is_chat_retracted );
        return false;
     };
