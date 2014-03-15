@@ -57,63 +57,56 @@ spa.shell = ( function () {
        	
        		if ( is_sliding ) { return false; }   
   
-      		 if ( do_extend ) {
-         	  jqueryMap.$chat.animate(
-              	{ height : configMap.chat_extend_height },
-              	configMap.chat_extend_time,
-              	function() {
-                 	jqueryMap.$chat.attr(
-                    	'title', configMap.chat_extended_title
-                 	);
-                 	stateMap.is_chat_retracted = false;
-                  	if ( callback ) {
-                     	callback ( jqueryMap.$chat );
-                  	}
-              	}
-           	);
+			if ( do_extend ) {
+         		jqueryMap.$chat.animate(
+              		{ height : configMap.chat_extend_height },
+              		configMap.chat_extend_time,
+              		function() {
+                 		jqueryMap.$chat.attr(
+                    		'title', configMap.chat_extended_title
+                 		);
+                 		stateMap.is_chat_retracted = false;
+                  		if ( callback ) {
+                     		callback ( jqueryMap.$chat );
+                  		}
+              		}
+           		);
            
            		return true; 
-       }
+       		}
     
-       
-       
-       
-       
-       
-       
-       
-       jqueryMap.$chat.animate(
-              { height : configMap.chat_retract_height },
-              configMap.chat_retract_time,
-              function() {
-                 jqueryMap.$chat.attr(
-                    'title', configMap.chat_retracted_title
-                 );
-                 stateMap.is_chat_retracted = true;
-                  if ( callback ) {
-                     callback ( jqueryMap.$chat );
-                  }
-              }
-       );
+       		jqueryMap.$chat.animate(
+            	{ height : configMap.chat_retract_height },
+              	configMap.chat_retract_time,
+              	function() {
+                	jqueryMap.$chat.attr(
+                    	'title', configMap.chat_retracted_title
+                 	);
+                 	stateMap.is_chat_retracted = true;
+                  	if ( callback ) {
+                    	callback ( jqueryMap.$chat );
+                  	}
+              	}
+       		);
     
-       return true;
-    };
+       		return true;
+    	};
     
-    //event handlers
-    onClickChat = function(event) {
-       toggleChat( stateMap.is_chat_retracted );
-       return false;
-    };
+    	//event handlers
+    	onClickChat = function(event) {
+       		toggleChat( stateMap.is_chat_retracted );
+       		return false;
+    	};
     
 		//public methods
 		initModule = function ( $container ) {
 			stateMap.$container = $container;
 			$container.html( configMap.main_html );
-		  setJqueryMap();
-     stateMap.is_chat_retracted = true;
-     jqueryMap.$chat
-        .attr( 'title', configMap.chat_retracted_title )
-        .click( onClickChat );
+		  	setJqueryMap();
+     		stateMap.is_chat_retracted = true;
+     		jqueryMap.$chat
+        		.attr( 'title', configMap.chat_retracted_title )
+        		.click( onClickChat );
 		};
 		
 		return { initModule : initModule };
