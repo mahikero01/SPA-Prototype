@@ -30,14 +30,22 @@ spa.shell = ( function () {
 		},
 		stateMap = {
 			$container : null,
+			anchor_map: {},
      		is_chat_retracted : true
 		},
 		jqueryMap = {
 		},
+		copyAnchorMap,
 		setJqueryMap,
     	toggleChat,
+    	changeAnchorPart,
     	onClickChat,
 		initModule;
+		
+		//Utility methods
+		copyAnchorMap = function () {
+			return $.extend(true, {}, stateMap.anchor_map);
+		};
 		
 		//DOM methods
 		setJqueryMap = function () {
@@ -91,10 +99,30 @@ spa.shell = ( function () {
     
        		return true;
     	};
+    	
+    	changeAnchorPart = function ( arg_map ) {
+    		var
+    			anchor_map_revised = copyAnchorMap(),
+    			bool_return = true,
+    			key_name,
+    			key_name_dep;
+    		
+    		KEYVAL:	
+    		for ( key_name in arg_map ) {
+    			if ( arg_map.hasOwnProperty( key_name ) ){
+    				if ( key_name.indexOf( '_' ) === 0 ) {
+    					continue KEYVAL;
+    				}
+    				anchor_map_revised
+    			}
+    		};
+    	};
     
     	//event handlers
     	onClickChat = function(event) {
-       		toggleChat( stateMap.is_chat_retracted );
+    		changeAnchorPart({
+    			chat: ( stateMap.is_chat_retracted ? 'open' : 'closed' )
+    		});
        		return false;
     	};
     
