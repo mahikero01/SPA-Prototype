@@ -8,6 +8,9 @@ spa.shell = ( function () {
 	//Module scope variables
 	var
 		configMap = {
+			anchor_schema_map: {
+				chat: { open: true, closed: true }
+			},
 			main_html : String()
 			  + '<div class="spa-shell-head">'
 				+ '<div class="spa-shell-head-logo"> </div>'
@@ -102,7 +105,7 @@ spa.shell = ( function () {
     	
     	changeAnchorPart = function ( arg_map ) {
     		var
-    			anchor_map_revised = copyAnchorMap(),
+    			anchor_map_revise = copyAnchorMap(),
     			bool_return = true,
     			key_name,
     			key_name_dep;
@@ -113,9 +116,25 @@ spa.shell = ( function () {
     				if ( key_name.indexOf( '_' ) === 0 ) {
     					continue KEYVAL;
     				}
-    				anchor_map_revised
+    				anchor_map_revise[key_name] = arg_map[key_name];
+    				key_name_dep = '_' + key_name;
+    				if ( arg_map[key_name_dep] ) {
+    					anchor_map_revise[key_name_dep] = arg_map[key_name_dep];
+    				} else {
+    					delete anchor_map_revise[key_name_dep];
+    					delete anchor_map_revise['_s' + key_name_dep];
+    				}
     			}
-    		};
+    		}
+    		
+    		try {
+    			$.uriAnchor.setAnchor( anchor_map_revise );
+    		} catch ( error ) {
+    			$.uriAnchor.setAnchor( stateMap.anchor_map, null, true );
+    			bool_return = false;   		
+    		}
+    		
+    		return bool_return;
     	};
     
     	//event handlers
