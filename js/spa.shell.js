@@ -138,12 +138,22 @@ spa.shell = ( function () {
     	};
     
     	//event handlers
+    	onhaschange = function ( event ) {
+    		var
+    			anchor_map_previous = copyAnchorMap();
+    			anchor_map_proposed,
+    			_s_chat_previous, 
+    			_s_chat_proposed,
+    			s_chat_proposed;
+    	};
+    	
     	onClickChat = function(event) {
     		changeAnchorPart({
     			chat: ( stateMap.is_chat_retracted ? 'open' : 'closed' )
     		});
        		return false;
     	};
+    	
     
 		//public methods
 		initModule = function ( $container ) {
