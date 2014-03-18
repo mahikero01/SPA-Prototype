@@ -138,13 +138,41 @@ spa.shell = ( function () {
     	};
     
     	//event handlers
-    	onhaschange = function ( event ) {
+    	onHaschange = function ( event ) {
     		var
-    			anchor_map_previous = copyAnchorMap();
+    			anchor_map_previous = copyAnchorMap(),
     			anchor_map_proposed,
     			_s_chat_previous, 
     			_s_chat_proposed,
     			s_chat_proposed;
+    	
+    		try {
+    			anchor_map_proposed = $.uriAnchor.makeAnchorMap();
+    		} catch ( error ) {
+    			$.uriAnchor.setAnchor( anchor_map_previous, null, true );
+    			return false;
+    		}
+    		stateMap.anchor_map = anchor_map_proposed;
+    		_s_chat_previous = anchor_map_previous._s_chat;
+    		_s_chat_proposed = anchor_map_proposed._s_chat;
+    		
+    		if ( ! anchor_map_previous
+    				|| _s_chat_previous != _s_chat_proposed ) {
+    			s_chat_proposed = anchor_map_proposed.chat;
+    			switch ( s_chat_proposed ) {
+    				case 'open':
+    					toggleChat( true );
+    					break;
+    				case 'closed':
+    					toggleChat( false );
+    					break;
+    				default:
+    					toggleChat( false );
+    					delete anchor_map_proposed.chat;
+    					$.uriAnchor.setAnchor( anchor_map_proposed, null, true );
+    			}
+    		}
+    		return false;
     	};
     	
     	onClickChat = function(event) {
@@ -157,6 +185,9 @@ spa.shell = ( function () {
     
 		//public methods
 		initModule = function ( $container ) {
+			$.uriAnchor.configModule({
+				schema_map: configMap.anchor_schema_map
+			});
 			stateMap.$container = $container;
 			$container.html( configMap.main_html );
 		  	setJqueryMap();
@@ -164,6 +195,10 @@ spa.shell = ( function () {
      		jqueryMap.$chat
         		.attr( 'title', configMap.chat_retracted_title )
         		.click( onClickChat );
+        		
+        	$(window)
+        		.bind( 'haschange', onHaschange )
+        		.trigger( 'haschange' );
 		};
 		
 		return { initModule : initModule };
