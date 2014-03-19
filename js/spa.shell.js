@@ -42,6 +42,7 @@ spa.shell = ( function () {
 		setJqueryMap,
     	toggleChat,
     	changeAnchorPart,
+    	onHashchange,
     	onClickChat,
 		initModule;
 		
@@ -138,7 +139,7 @@ spa.shell = ( function () {
     	};
     
     	//event handlers
-    	onHaschange = function ( event ) {
+    	onHashchange = function ( event ) {
     		var
     			anchor_map_previous = copyAnchorMap(),
     			anchor_map_proposed,
@@ -157,7 +158,7 @@ spa.shell = ( function () {
     		_s_chat_proposed = anchor_map_proposed._s_chat;
     		
     		if ( ! anchor_map_previous
-    				|| _s_chat_previous != _s_chat_proposed ) {
+    				|| _s_chat_previous !== _s_chat_proposed ) {
     			s_chat_proposed = anchor_map_proposed.chat;
     			switch ( s_chat_proposed ) {
     				case 'open':
@@ -185,9 +186,7 @@ spa.shell = ( function () {
     
 		//public methods
 		initModule = function ( $container ) {
-			$.uriAnchor.configModule({
-				schema_map: configMap.anchor_schema_map
-			});
+			
 			stateMap.$container = $container;
 			$container.html( configMap.main_html );
 		  	setJqueryMap();
@@ -196,9 +195,13 @@ spa.shell = ( function () {
         		.attr( 'title', configMap.chat_retracted_title )
         		.click( onClickChat );
         		
+        	$.uriAnchor.configModule({
+				schema_map: configMap.anchor_schema_map
+			});
+        		
         	$(window)
-        		.bind( 'haschange', onHaschange )
-        		.trigger( 'haschange' );
+        		.bind( 'hashchange', onHashchange )
+        		.trigger( 'hashchange' );
 		};
 		
 		return { initModule : initModule };
