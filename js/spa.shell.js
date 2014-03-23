@@ -4,7 +4,6 @@ newcap : true, nomen : true, plusplus : true,
 regexp : true, sloppy : true, vars : false,
 white : true
 */
-//
 spa.shell = ( function () {
 	//Module scope variables
 	var
