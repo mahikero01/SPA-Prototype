@@ -6,28 +6,47 @@ white : true
 */
 /*global $, spa*/
 
-spa.chat = function () {
+spa.chat = (function () {
 //module scope variable
-var
-	configMap = {
-		main_html : String()
-			+ '<div style="padding:1em; color:#fff;">'
-			+ 'Say hello to chat'
-			+ '</div>',
-		settable_map : {} 
-	},
-	sateMap = {
-		$ontainer : null
-	},
-	jqueryMap = {},
-	setJqueryMap,
-	configModule,
-	initModule;
-};
-
-//DOM methods
-setJqueryMap = function () {
 	var
-		$container = stateMap.$container;
-		jqueryMap = { $container : $container };
-};
+		configMap = {
+			main_html : String()
+				+ '<div style="padding:1em; color:#fff;">'
+				+ 'Say hello to chat'
+				+ '</div>',
+			settable_map : {} 
+		},
+		sateMap = {
+			$container : null
+		},
+		jqueryMap = {},
+		setJqueryMap,
+		configModule,
+		initModule;
+	
+	//DOM methods
+	setJqueryMap = function () {
+		var
+			$container = stateMap.$container;
+			jqueryMap = { $container : $container };
+	};
+
+	//public methods
+	configModule = function ( input_map ) {
+		spa.util.setConfigMap({
+			input_map : input_map,
+			settable_map : configMap.settable_map,
+			config_map : configMap
+		});
+		return true;
+	};
+
+	initModule = function ( $container ) {
+		$container.html( configMap.main_html );
+		stateMap.$container = $container;
+		setJqueryMap();
+		return true;
+	};
+}());
+
+
