@@ -41,6 +41,7 @@ spa.chat = (function () {
 		return true;
 	};
 
+
 	initModule = function ( $container ) {
 		$container.html( configMap.main_html );
 		stateMap.$container = $container;
