@@ -16,7 +16,7 @@ spa.chat = (function () {
 				+ '</div>',
 			settable_map : {} 
 		},
-		sateMap = {
+		stateMap = {
 			$container : null
 		},
 		jqueryMap = {},
@@ -47,6 +47,13 @@ spa.chat = (function () {
 		setJqueryMap();
 		return true;
 	};
+	
+	return {
+		configModule : configModule,
+		initModule : initModule
+	};
+	
+	
 }());
 
 
