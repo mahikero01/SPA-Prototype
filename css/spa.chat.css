@@ -4,15 +4,15 @@
 	right: 0;
 	width: 25em;
 	height: 2em;
-	background: #FFFFFF;
+	background: #fff;
 	border-radius: 0.5em 0 0 0;
+	border-style: solid;
 	border-width: thin 0 0 thin;
-	border-color: #888888;
+	border-color: #888;
 	box-shadow: 0 0 0.75em 0 #888;
 	z-index: 1;
 }
- 
- 
+
 .spa-chat-head, .spa-chat-closer {
 	position: absolute;
 	top: 0;
@@ -83,9 +83,8 @@
 	left: 1em;
 	right: 1em;
 	bottom: 1em;
-	border: thin solid #8888;
+	border: thin solid #888;
 	background: #888;	
-	
 }
 
 .spa-chat-box input[type=text] {
@@ -94,14 +93,24 @@
 	height: 100%;
 	padding: 0.5em;
 	border: 0;
-	background: #ddd
-	color: 404040;
+	background: #ddd;
+	color: #404040;
 }
 
 .spa-chat-box input[type=text]:focus {
 	background: #fff;
 }
 
+.spa-chat-box div {
+	float: left;
+	width: 25%;
+	height: 2em;
+	line-height: 1.9em;
+	text-align: center;
+	color: #fff;
+	font-weight: 800;
+	cursor: pointer;
+}
 .spa-chat-box div:hover {
 	background-color: #444;
 	color: #ff0;
