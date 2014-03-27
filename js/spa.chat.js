@@ -6,6 +6,7 @@ white : true
 */
 /*global $, spa, getComputedStyle */
 
+
 spa.chat = (function () {
 //module scope variable
 	var
