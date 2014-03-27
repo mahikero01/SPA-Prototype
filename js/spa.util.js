@@ -6,6 +6,7 @@ white : true
 */
 /*global $, spa*/
 
+
 spa.util = (function () { 
 	var
 		makeError,

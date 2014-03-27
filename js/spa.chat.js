@@ -51,28 +51,28 @@ spa.chat = (function () {
 			set_chat_anchor: null		
 		},
 		stateMap = {
-     $append_target: null,
-     position_type: 'closed',
-     px_per_em: 0,
-     slider_hidden_px: 0,
-     slider_closed_px: 0,
-     slider_opened_px: 0
+     	$append_target: null,
+     	position_type: 'closed',
+     	px_per_em: 0,
+     	slider_hidden_px: 0,
+     	slider_closed_px: 0,
+     	slider_opened_px: 0
 		},
 		jqueryMap = {},
 		setJqueryMap,
-    getEmSize,
-    setPxSizes,
-    setSliderPosition,
-    onClickToggle,
+    	getEmSize,
+    	setPxSizes,
+    	setSliderPosition,
+    	onClickToggle,
 		configModule,
 		initModule;
 	
- //utility
- getEmSize = function ( elem ) {
-    return Number(
-       getComputedStyle( elem, '' ).fontSize.match(/\d*\.?\d*/) [0]
-    );
- };
+ 	//utility
+ 	getEmSize = function ( elem ) {
+   		return Number(
+       		getComputedStyle( elem, '' ).fontSize.match(/\d*\.?\d*/) [0]
+    	);
+ 	};
  
 	//DOM methods
 	setJqueryMap = function () {

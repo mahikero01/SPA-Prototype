@@ -6,4 +6,5 @@ white : true
 */
 /*global $, spa*/
 
+
 spa.model = (function () { return{}; }());

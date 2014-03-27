@@ -5,6 +5,7 @@ regexp : true, sloppy : true, vars : false,
 white : true
 */
 /*global $, spa */
+
 spa.shell = ( function () {
 	//Module scope variables
 	var
