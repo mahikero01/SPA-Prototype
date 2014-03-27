@@ -78,13 +78,14 @@ spa.chat = (function () {
 	//DOM methods
 	setJqueryMap = function () {
 		var
-     $append_target = stateMap.$append_target,
-     $slider = $append_target.find( '.spa-chat' );
+     		$append_target = stateMap.$append_target,
+     		$slider = $append_target.find( '.spa-chat' );
 	
 			jqueryMap = { 
-        $slider: $slider,
-        $head: $slider.find( '.spa-chat-head' ),
-        $toggle: $slider.find( '.spa-chat-head-toggle' ),
+        		$slider: $slider,
+        		$head: $slider.find( '.spa-chat-head' ),
+        		$toggle: $slider.find( '.spa-chat-head-toggle' ),
+        		$toggle: $slider.find( '.spa-chat-head-toggle' ),
      };
 	};
 
