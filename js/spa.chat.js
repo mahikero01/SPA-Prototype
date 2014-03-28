@@ -109,6 +109,70 @@ spa.chat = (function () {
 		});
 	};
 
+	setSliderPosition = function ( position_type, callback ) {
+		var	
+			height_px,
+			animate_time,
+			slider_title,
+			toggle_text;
+			
+		if ( stateMap.position_type === position_type ) {
+			return true;
+		}
+		
+		switch ( position_type ) {
+			case 'opened':
+				height_px = stateMap.slider_opened_px;
+				animate_time = configMap.slider_open_time;
+				slider_title = configMap.slider_opened_title;
+				toggle_text = '=';
+			break;
+			
+			case 'hidden':
+				height_px = 0;
+				animate_time = configMap.slider_open_time;
+				slider_title = '';
+				toggle_text = '+';
+			break;
+			case 'closed':
+				height_px = stateMap.slider_closed_px;
+				animate_time = configMap.slider_close_time;
+				slider_title = configMap.slider_closed_title;
+				toggle_text = '+';
+			break;
+			default:
+				return false;
+		}
+		
+		stateMap.position_type = '';
+		
+		jqueryMap.$slider.animate(
+			{ height: height_px },
+			animate_time,
+			function () {
+				jqueryMap.$toggle.pro( 'title', slider_title );
+				jqueryMap.$toggle.text( toggle_text );
+				stateMap.position_type = position_type;
+				if ( callback ) { callback( jqueryMap.$slider ); }
+			}
+		);
+		
+		return true;
+	};
+
+	//event handlers
+	onClickToggle = function ( event ) {
+		var set_char_anchor = configMap.set_chat_anchor;
+			
+		if ( stateMap.position_type === 'opened' ) {
+			set_char_anchor('closed');
+		} else if ( stateMap.position_type === 'closed' ) {
+			set_char_anchor('opened');
+		}	
+		
+		return false;
+	};
+
 	//public methods
 	configModule = function ( input_map ) {
 		spa.util.setConfigMap({
@@ -120,14 +184,21 @@ spa.chat = (function () {
 	};
 
 
-	initModule = function ( $container ) {
-		$container.html( configMap.main_html );
-		stateMap.$container = $container;
+	initModule = function ( $append_target ) {
+		$append_target.append( configMap.main_html );
+		stateMap.$append_target = $append_target;
 		setJqueryMap();
+		setPxSizes();
+		
+		jqueryMap.$toggle.prop('title', configMap.slider_closed_title);
+		jqueryMap.$head.click( onClickToggle );
+		stateMap.position_type = 'closed';
+		
 		return true;
 	};
 	
 	return {
+		setSliderPosition : setSliderPosition,
 		configModule : configModule,
 		initModule : initModule
 	};
