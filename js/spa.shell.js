@@ -5,7 +5,6 @@ regexp : true, sloppy : true, vars : false,
 white : true
 */
 /*global $, spa */
-
 spa.shell = ( function () {
 	//Module scope variables
 	var
@@ -148,11 +147,6 @@ spa.shell = ( function () {
 			stateMap.$container = $container;
 			$container.html( configMap.main_html );
 		  	setJqueryMap();
-     		//stateMap.is_chat_retracted = true;
-     		//jqueryMap.$chat
-        	//	.attr( 'title', configMap.chat_retracted_title )
-        	//	.click( onClickChat );
-        	//	
         	$.uriAnchor.configModule({
 				schema_map: configMap.anchor_schema_map
 			});
