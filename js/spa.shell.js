@@ -31,6 +31,7 @@ spa.shell = ( function () {
       		chat_extended_title : 'Click to retract',
       		chat_retracted_title : 'Click to extend'
 		},
+		//current state ng web page
 		stateMap = { anchor_map: {} },
 		jqueryMap = {},
 		copyAnchorMap,
