@@ -12,6 +12,7 @@ spa.shell = ( function () {
 			anchor_schema_map: {
 				chat: { opened: true, closed: true }
 			},
+			resize_interval : 200,
 			main_html : String()
 			  + '<div class="spa-shell-head">'
 				+ '<div class="spa-shell-head-logo"> </div>'
@@ -32,12 +33,17 @@ spa.shell = ( function () {
       		chat_retracted_title : 'Click to extend'
 		},
 		//current state ng web page
-		stateMap = { anchor_map: {} },
+		stateMap = { 
+			$container : undefined,
+			anchor_map: {},
+			resize_idto : undefined 
+		},
 		jqueryMap = {},
 		copyAnchorMap,
 		setJqueryMap,
     	changeAnchorPart,
     	onHashchange,
+    	onResize,
     	setChatAnchor,
 		initModule;
 		
@@ -137,6 +143,18 @@ spa.shell = ( function () {
     		return false;
     	};
     	
+    	onResize = function () {
+    		if ( stateMap.resize_idto ) { return true; }
+    		
+    		spa.chat.handleResize();
+    		stateMap.resize_idto = setTimeout(
+    			function () { stateMap.resize_idto = undefined; },
+    			configMap.resize_interval
+    		);
+    		
+    		return true;
+    	};
+    	
     	//callbacks
     	setChatAnchor = function ( position_type ) {
     		return changeAnchorPart({ chat: position_type });
@@ -160,6 +178,7 @@ spa.shell = ( function () {
         	spa.chat.initModule( jqueryMap.$container );
         		
         	$(window)
+        		.bind( 'resize', onResize )
         		.bind( 'hashchange', onHashchange )
         		.trigger( 'hashchange' );
 		};
