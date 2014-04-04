@@ -31,5 +31,10 @@ spa.util_b = (function () {
 		{}, configMap.html_encode_map
 	);
 	delete configMap.encode_noamp_map['&'];
+	
+	//utility methods
+	decodeHtml = function ( str ) {
+		return $('<div/>').html(str || '').text();
+	};
 	return{}; 
 }());
