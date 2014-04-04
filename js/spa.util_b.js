@@ -36,5 +36,20 @@ spa.util_b = (function () {
 	decodeHtml = function ( str ) {
 		return $('<div/>').html(str || '').text();
 	};
+	
+	encodeHtml = function ( input_arg_str, exclude_amp ) {
+		var
+			input_str = String( input_arg_str ),
+			regex, 
+			lookup_map;
+		
+		if ( exclude_amp ) {
+			lookup_map = configMap.encode_noamp_map;
+			regex = configMap.regex_encode_noamp;
+		} else {
+			lookup_map = configMap.html_encode_map;
+			regex = configMap.regex_encode_html;
+		}
+	};
 	return{}; 
 }());
