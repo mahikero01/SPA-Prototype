@@ -50,6 +50,10 @@ spa.util_b = (function () {
 			lookup_map = configMap.html_encode_map;
 			regex = configMap.regex_encode_html;
 		}
+		
+		return input_str.replace(
+			
+		);
 	};
 	return{}; 
 }());
